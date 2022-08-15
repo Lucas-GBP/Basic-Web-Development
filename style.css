@@ -1,0 +1,13 @@
+body {
+    background-color: #101010;
+    color: #f8f8f8; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+em {
+    color: #10f8f8;
+}
+
+strong {
+    color: #10f810;
+}
