@@ -49,3 +49,36 @@ nav ul li a{
 nav ul li a:hover  {
     background-color: #101010;
 }
+
+#calculator {
+    background-color: #000000;
+    padding: 0;
+}
+
+#calculator input {
+
+}
+
+#calculator ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#calculator li {
+    padding: 0;
+    margin: 0;
+}
+
+#calculator button {
+    color: #f8f8f8;
+    appearance: none;
+    margin: 0.2em;
+    background-color: #101010;
+    width: 5em;
+    height: 5em;
+    border-style: none;
+}
+
+#calculator button:hover {
+    background-color: #1010f0;
+}
