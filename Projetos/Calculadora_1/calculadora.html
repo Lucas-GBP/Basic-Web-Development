@@ -2,10 +2,8 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width-devide-width">
         <title> Calculadora 1 </title>
         <link rel="stylesheet" href="style_calculadora.css">
-        <script src="code_calculadora.js"></script>
     </head>
     <body>
         <header>
@@ -13,19 +11,19 @@
         </header>
         <main>
             <div id="calculator">
-                <input>
+                <div id="cal-screen"></div>
                 <ul>
                     <li>
-                        <button>7</button><button>8</button><button>9</button><button>X</button>
+                        <button id="cal-button-7">7</button><button id="cal-button-8">8</button><button id="cal-button-9">9</button><button id="cal-button-X">X</button>
                     </li>
                     <li>
-                        <button>4</button><button>5</button><button>6</button><button>-</button>
+                        <button id="cal-button-4">4</button><button id="cal-button-5">5</button><button id="cal-button-6">6</button><button id="cal-button-minus">-</button>
                     </li>
                     <li>
-                        <button>1</button><button>2</button><button>3</button><button>+</button>
+                        <button id="cal-button-1">1</button><button id="cal-button-2">2</button><button id="cal-button-3">3</button><button id="cal-button-plus">+</button>
                     </li>
                     <li>
-                        <button>0</button><button>.</button><button>=</button><button>/</button>
+                        <button id="cal-button-0">0</button><button id="cal-button-dot">.</button><button id="cal-button-=">=</button><button id="cal-button-/">/</button>
                     </li>
                 </ul>
             </div>
@@ -33,5 +31,8 @@
         <footer>
             <a href="../../index.html"> Voltar para Home </a>
         </footer>
+
+        <script src="code_calculadora.js"></script>
+
     </body>
 </html>
