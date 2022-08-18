@@ -25,8 +25,10 @@ const div_button  = document.getElementById("cal-button-/");
 /*Varibles*/
 
 var calculator_state = 0;
-    const indle = 0;
-    const calculating = 1;
+    const input_1 = 0;
+    const select_operation = 1;
+    const input_2 = 2;
+    const result = 3;
 
 var calculator_operator = 0;
     const Equal = 0;
@@ -34,57 +36,90 @@ var calculator_operator = 0;
     const Sub = 2;
     const Mult = 3;
     const Divi = 4;
+    const None = 5;
 
 let first_number = 0;
 let second_number = 0;
 //let result = 0;
 
 function add_value_to_screen(value) {
-    if(calculator_state == indle && calculator_operator != Equal){
+    if(calculator_state == result){
+        calculator_state = input_1;
         cal_screen.innerHTML = value;
-        calculator_state = calculating;
+
+        console.log(calculator_state+""+calculator_operator);
         return
     }
-    if(calculator_state == calculating && calculator_operator == Equal){
+    if(calculator_state == select_operation){
+        calculator_state = input_2;
         cal_screen.innerHTML = value;
-        calculator_state = indle;
-        return
+
+        console.log(calculator_state+""+calculator_operator);
+        return;
     }
 
     console.log(calculator_state+""+calculator_operator);
     cal_screen.innerHTML += value;
 }
 
-function change_operation(operation){
-    if(calculator_state == indle){
-        calculator_operator = operation;
-        if(operation != Equal){
-            first_number = parseFloat(cal_screen.innerHTML);
-        }
+function calculate_result(){
+    console.log(calculator_state+""+calculator_operator);
+    calculator_state = result;
+    second_number = parseFloat(cal_screen.innerHTML);
 
-        return;
+    switch (calculator_operator) {
+    case Sum:
+        first_number = first_number + second_number;
+        break;
+    case Sub:
+        first_number = first_number - second_number;
+        break;
+    case Mult:
+        first_number = first_number * second_number;
+        break;
+    case Divi:
+        first_number = first_number / second_number;
+        break;
     }
-    if(calculator_state == calculating && operation == Equal){
-        second_number = parseFloat(cal_screen.innerHTML);
+    calculator_operator = None;
 
-        switch (calculator_operator) {
-            case Sum:
-                first_number = first_number + second_number;
-                break;
-            case Sub:
-                first_number = first_number - second_number;
-                break;
-            case Mult:
-                first_number = first_number * second_number;
-                break;
-            case Divi:
-                first_number = first_number / second_number;
-                break;
+    cal_screen.innerHTML = first_number;
+    console.log(calculator_state+""+calculator_operator);
+}
+
+function change_operation(operation){
+
+    if(operation == Equal){
+        if(calculator_state == select_operation){
+            calculate_result();
+            return;
         }
-        cal_screen.innerHTML = first_number;
-        calculator_operator = operation;
-
-        return;
+        if(calculator_state == input_2){
+            calculate_result();
+            return;
+        }
+    }
+    if(operation != Equal){
+        if(calculator_state == input_1){
+            calculator_state = select_operation;
+            calculator_operator = operation;
+            first_number = parseFloat(cal_screen.innerHTML)
+            return;
+        }
+        if(calculator_state == select_operation){
+            calculator_operator = operation;
+            return;
+        }
+        if(calculator_state == input_2){
+            calculator_operator = operation;
+            return;
+        }
+        if(calculator_state == result){
+            calculator_state = input_2;
+            calculator_operator = operation;
+            cal_screen.innerHTML = 0;
+            return;
+        }
     }
 }
 

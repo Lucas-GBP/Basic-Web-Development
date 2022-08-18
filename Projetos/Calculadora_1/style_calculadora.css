@@ -12,53 +12,15 @@ header {
 
 header h1 {
     margin-top: 0;
-    padding: 0.3em 0.3em;
-}
-
-nav {
-    padding: 1em 0em 1em 0em;
-}
-
-nav ul {
-    padding: 0;
-    margin: 0;
-    margin-left: 0.5em;
-}
-
-nav ul li {
-    display: inline;
-    padding: 0em;
-    margin-bottom: 0em;
-}
-
-nav ul li a{
-    color: #f8f8f8;
-    padding: 0.5em 1em;
-    margin-bottom: 0.5em;
-    text-decoration: none;
-}
-
-nav ul li a:hover  {
-    background-color: #101010;
+    padding: 10px 10px;
 }
 
 #calculator {
     background-color: #000000;
-    padding: 0.7em;
+    padding: 11px;
     margin: auto;
     width: -webkit-fit-content;
     width: -moz-fit-content;
-}
-
-#cal-screen {
-    margin: .2em .7em 1em .2em;
-    /*margin: 0em 0em 1em 0em;*/
-    border: 0;
-    padding: 0;
-    height: 5em;
-    width: calc(100% - .4em);
-    background-color: #f8f8f8;
-    color: #000000;
 }
 
 #calculator ul {
@@ -72,10 +34,10 @@ nav ul li a:hover  {
     background-color: #101010;
     appearance: none;
     border-style: none;
-    margin: 0.2em;
+    margin: 3px;
     padding: 0;
-    width: 5em;
-    height: 5em;
+    width: 67px;
+    height: 67px;
     cursor: pointer;
 }
 
@@ -85,4 +47,17 @@ nav ul li a:hover  {
 
 #calculator button:active{
     background-color: #10a0f0;
+}
+
+#cal-screen {
+    margin: 3px 11px 16px 3px;
+    /*margin: 0em 0em 1em 0em;*/
+    border: 0;
+    padding: 0px ;
+    height: 67px;
+    width: calc(100% - 6.4px);
+    max-width: 100%;
+    background-color: #f8f8f8;
+    color: #000000;
+    font-size: 60px;
 }
