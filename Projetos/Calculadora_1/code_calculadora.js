@@ -47,23 +47,20 @@ function add_value_to_screen(value) {
         calculator_state = input_1;
         cal_screen.innerHTML = value;
 
-        console.log(calculator_state+""+calculator_operator);
         return
     }
     if(calculator_state == select_operation){
         calculator_state = input_2;
         cal_screen.innerHTML = value;
 
-        console.log(calculator_state+""+calculator_operator);
         return;
     }
 
-    console.log(calculator_state+""+calculator_operator);
+    //console.log(calculator_state+""+calculator_operator);
     cal_screen.innerHTML += value;
 }
 
 function calculate_result(){
-    console.log(calculator_state+""+calculator_operator);
     calculator_state = result;
     second_number = parseFloat(cal_screen.innerHTML);
 
@@ -84,7 +81,6 @@ function calculate_result(){
     calculator_operator = None;
 
     cal_screen.innerHTML = first_number;
-    console.log(calculator_state+""+calculator_operator);
 }
 
 function change_operation(operation){
@@ -117,7 +113,7 @@ function change_operation(operation){
         if(calculator_state == result){
             calculator_state = input_2;
             calculator_operator = operation;
-            cal_screen.innerHTML = 0;
+            cal_screen.innerHTML = "";
             return;
         }
     }
