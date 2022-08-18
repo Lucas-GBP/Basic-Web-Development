@@ -39,6 +39,7 @@ header h1 {
     width: 67px;
     height: 67px;
     cursor: pointer;
+    font-size: 60px;
 }
 
 #calculator button:hover {
@@ -51,12 +52,9 @@ header h1 {
 
 #cal-screen {
     margin: 3px 11px 16px 3px;
-    /*margin: 0em 0em 1em 0em;*/
     border: 0;
-    padding: 0px ;
     height: 67px;
     width: calc(100% - 6.4px);
-    max-width: 100%;
     background-color: #f8f8f8;
     color: #000000;
     font-size: 60px;
