@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .calculator {
+        @apply bg-black m-auto p-3 max-w-fit;
+    }
+
+    .calculator-button{
+        @apply bg-gray-900 
+        cursor-pointer 
+        appearance-none
+        border-none
+        w-16 h-16 
+        p-0 m-1 
+        text-4xl text-slate-100 text-center
+        hover:bg-blue-900;
+    }
+
+    .calculator-display {
+        @apply border-0 
+        h-16
+        m-1
+        text-black text-6xl bg-slate-100
+        ;
+        /*
+        border: 0;
+        height: 67px;
+        color: #000000;
+        font-size: 60px;
+        background-color: #f8f8f8;
+        */
+        /*margin: 3px 11px 16px 3px;*/
+        /*width: calc(100% - 6.4px);*/
+    }
+}
