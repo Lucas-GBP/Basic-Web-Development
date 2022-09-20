@@ -1,0 +1,263 @@
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title> Calculadora 1 </title>
+        <style type="text/css">
+            body {
+                background-color: #101010;
+                color: #f8f8f8; 
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 0;
+                margin: 0;
+            }
+
+            header {
+                background-color: #202020;
+            }
+
+            header h1 {
+                margin-top: 0;
+                padding: 10px 10px;
+            }
+
+            #calculator {
+                background-color: #000000;
+                padding: 11px;
+                margin: auto;
+                width: -webkit-fit-content;
+                width: -moz-fit-content;
+            }
+
+            #calculator ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #calculator button {
+                color: #f8f8f8;
+                background-color: #101010;
+                appearance: none;
+                border-style: none;
+                margin: 3px;
+                padding: 0;
+                width: 67px;
+                height: 67px;
+                cursor: pointer;
+                font-size: 60px;
+            }
+
+            #calculator button:hover {
+                background-color: #1010f0;
+            }
+
+            #calculator button:active{
+                background-color: #10a0f0;
+            }
+
+            #cal-screen {
+                margin: 3px 11px 16px 3px;
+                border: 0;
+                height: 67px;
+                width: calc(100% - 6.4px);
+                background-color: #f8f8f8;
+                color: #000000;
+                font-size: 60px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1> Calculadora </h1>
+        </header>
+        <main>
+            <div id="calculator">
+                <div id="cal-screen"></div>
+                <ul>
+                    <li>
+                        <button id="cal-button-7">7</button><button id="cal-button-8">8</button><button id="cal-button-9">9</button><button id="cal-button-X">X</button>
+                    </li>
+                    <li>
+                        <button id="cal-button-4">4</button><button id="cal-button-5">5</button><button id="cal-button-6">6</button><button id="cal-button-minus">-</button>
+                    </li>
+                    <li>
+                        <button id="cal-button-1">1</button><button id="cal-button-2">2</button><button id="cal-button-3">3</button><button id="cal-button-plus">+</button>
+                    </li>
+                    <li>
+                        <button id="cal-button-0">0</button><button id="cal-button-dot">.</button><button id="cal-button-=">=</button><button id="cal-button-/">/</button>
+                    </li>
+                </ul>
+            </div>
+        </main>
+        <script type="text/javascript">
+            /*
+            -- Constants
+            */
+            //Calculator Screen
+            const cal_screen = document.getElementById("cal-screen");
+            //Caclulator Number Buttons
+            const number_buttons = [
+                document.getElementById("cal-button-0"),
+                document.getElementById("cal-button-1"),
+                document.getElementById("cal-button-2"),
+                document.getElementById("cal-button-3"),
+                document.getElementById("cal-button-4"),
+                document.getElementById("cal-button-5"),
+                document.getElementById("cal-button-6"),
+                document.getElementById("cal-button-7"),
+                document.getElementById("cal-button-8"),
+                document.getElementById("cal-button-9")
+            ];
+            //Calculator Function Numbers
+            const button_dot = document.getElementById("cal-button-dot");
+            const func_buttons = [
+                document.getElementById("cal-button-="),
+                document.getElementById("cal-button-plus"),
+                document.getElementById("cal-button-minus"),
+                document.getElementById("cal-button-X"),
+                document.getElementById("cal-button-/")
+            ];
+            //Calculator States
+            const input_1 = 0;
+            const select_operation = 1;
+            const input_2 = 2;
+            const result = 3;
+            //Calculator Operators
+            const Equal = 0;
+            const Sum = 1;
+            const Sub = 2;
+            const Mult = 3;
+            const Divi = 4;
+            const None = 5;
+            //Calculator Color
+            const buttonColor_indle = "#101010";
+            const buttonColor_mouseover = "#1010f0";
+            const buttonColor_selected = "#101060";
+
+            /*
+            -- Varibles
+            */
+            var calculator_state = input_1;
+            var calculator_operator = None;
+            let first_number = 0;
+            let second_number = 0;
+
+            /*
+            -- Functions
+            */
+            function add_value_to_screen(value) {
+                if(calculator_state == result){
+                    calculator_state = input_1;
+                    cal_screen.innerHTML = value;
+
+                    return
+                }
+                if(calculator_state == select_operation){
+                    calculator_state = input_2;
+                    cal_screen.innerHTML = value;
+
+                    return;
+                }
+
+                //console.log(calculator_state+""+calculator_operator);
+                cal_screen.innerHTML += value;
+            }
+
+            function calculate_result(){
+                calculator_state = result;
+                second_number = parseFloat(cal_screen.innerHTML);
+
+                switch (calculator_operator) {
+                case Sum:
+                    first_number = first_number + second_number;
+                    break;
+                case Sub:
+                    first_number = first_number - second_number;
+                    break;
+                case Mult:
+                    first_number = first_number * second_number;
+                    break;
+                case Divi:
+                    first_number = first_number / second_number;
+                    break;
+                }
+
+                func_buttons[calculator_operator].style.backgroundColor = buttonColor_indle;
+                calculator_operator = None;
+
+                cal_screen.innerHTML = first_number;
+            }
+
+            function change_operation(operation){
+                if(operation == Equal){
+                    if(calculator_state == select_operation){
+                        calculate_result();
+                        return;
+                    }
+                    if(calculator_state == input_2){
+                        calculate_result();
+                        return;
+                    }
+                }
+                if(operation != Equal){
+                    if(calculator_operator != None){
+                        func_buttons[calculator_operator].style.backgroundColor = buttonColor_indle;
+                    }
+                    if(calculator_state == input_1){
+                        calculator_state = select_operation;
+                        calculator_operator = operation;
+                        first_number = parseFloat(cal_screen.innerHTML)
+                        return;
+                    }
+                    if(calculator_state == select_operation){
+                        calculator_operator = operation;
+                        return;
+                    }
+                    if(calculator_state == input_2){
+                        calculator_operator = operation;
+                        return;
+                    }
+                    if(calculator_state == result){
+                        calculator_state = input_2;
+                        calculator_operator = operation;
+                        cal_screen.innerHTML = "";
+                        return;
+                    }
+                }
+            }
+
+            function change_op_style(operation){
+                if(operation != Equal){
+                    func_buttons[operation].style.backgroundColor = buttonColor_selected;
+                }
+            }
+
+            /*
+            -- Setting Events
+            */
+            for(let i = 0; i < 10; i++){
+                number_buttons[i].onclick = function (){add_value_to_screen(i);}
+            }
+            button_dot.onclick = function (){add_value_to_screen(".")}
+            for(let i = 0; i < 5; i++){
+                func_buttons[i].onclick = function (){
+                    change_operation(i);
+                    change_op_style(i);
+                }
+                if(i != Equal){
+                    func_buttons[i].onmouseover = function () {
+                        func_buttons[i].style.backgroundColor = buttonColor_mouseover;
+                    }
+                    func_buttons[i].onmouseout = function () {
+                        if(i != calculator_operator){
+                            func_buttons[i].style.backgroundColor = buttonColor_indle;
+                        } else {
+                            func_buttons[i].style.backgroundColor = buttonColor_selected;    
+                        }
+                    }
+                }
+            }
+        </script>
+
+    </body>
+</html>
